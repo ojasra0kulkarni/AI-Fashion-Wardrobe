@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion AI Stylist</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .response p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fashion AI Stylist</h1>
+    
+    <div class="container">
+        <p><strong>Ask your question:</strong></p>
+        <input type="text" id="userMessage" placeholder="What should I wear for a dinner date?" />
+        <button onclick="askAI()">Ask AI</button>
+
+        <div class="response" id="aiResponse">
+            <p><strong>AI's Suggestion:</strong></p>
+            <p id="replyText">Your suggestion will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        async function askAI() {
+            const userMessage = document.getElementById('userMessage').value;
+            const responseDiv = document.getElementById('aiResponse');
+            const replyText = document.getElementById('replyText');
+
+            if (!userMessage.trim()) {
+                alert('Please enter a message!');
+                return;
+            }
+
+            responseDiv.style.display = 'block'; // Show the response container while waiting
+
+            try {
+                const res = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                });
+                const data = await res.json();
+
+                if (data.reply) {
+                    replyText.textContent = data.reply;
+                } else {
+                    replyText.textContent = 'Sorry, something went wrong. Please try again later.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                replyText.textContent = 'Sorry, something went wrong. Please try again later.';
+            }
+        }
+    </script>
+</body>
+</html>
