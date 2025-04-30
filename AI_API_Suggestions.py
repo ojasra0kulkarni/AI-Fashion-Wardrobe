@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 # Gemini API settings
-GEMINI_API_KEY = "AIzaSyAnqed_hXXm60m2pwav0V1cFi43Dnc1sWw"  # Replace with your Gemini API key
+GEMINI_API_KEY = "haha"  # Replace with your Gemini API key
 genai.configure(api_key=GEMINI_API_KEY)
 MODEL_NAME = "gemini-1.5-flash"
 
