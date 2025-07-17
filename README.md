@@ -1,6 +1,6 @@
 # AI-Fashion-Wardrobe
 AI Fashion Stylist is a web app that lets users upload clothing images, run an AI script to generate weekly outfits, and view results in a sleek UI. It features image preview/removal, real-time terminal logs, and auto-organized daily outfit displays.
-Here’s a concise and polished **350-word GitHub description** for your **AI Fashion Stylist** project:
+
 
 ---
 
